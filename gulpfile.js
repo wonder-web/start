@@ -26,7 +26,7 @@ var paths = {
   assets: 'src/assets/*'
 };
 
-gulp.task('default', ['clean', 'copy', 'css', 'node']);
+gulp.task('default', ['clean', 'copy', 'css']);
 
 gulp.task('node', function () {
   nodemon({
