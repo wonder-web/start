@@ -1,0 +1,90 @@
+<section class="payme page_section" id="form">
+    <div class="subscribe payme-content">
+        <h2 class="section_title is-invert">Оплатить и скачать</h2>
+         <ul class="form_promo">
+             <li class="form-promo_item is-current">
+                 <div class="num">$50</div>
+                 за вебинар
+             </li>
+             <li class="form-promo_item is-invert">
+                 <div class="num is-infin">∞</div>
+                 Slack+PDF
+             </li>
+         </ul>
+        <div class="form">
+            <%= form_tag signup_path, method: :post, id: 'subscribe-form' do |form| %>
+                <div class="form_row">
+                    <div class="form_container is-half">
+                        <input name="signup[name]" type="text" placeholder="Имя и фамилия" class="form_field required">
+                    </div>
+                    <div class="form_container is-half">
+                        <input name="signup[email]" type="email" placeholder="E-mail" class="form_field required email">
+                    </div>
+                </div>
+                <div class="form_row is-radio-list">
+                    <div class="form-row_radio">
+                        <input type="radio" name="signup[status]" id="thinking" value='dreamer' class="form_radio">
+                        <label for="thinking" class="form_label">Только думаю о переезде</label>
+                    </div>
+                    <div class="form-row_radio">
+                        <input type="radio" name="signup[status]" value='onthemove' id="inprogress" class="form_radio">
+                        <label for="inprogress" class="form_label">Переезжаю, в процессе</label>
+                    </div>
+                    <div class="form-row_radio">
+                        <input type="radio" name="signup[status]" value='alreadymoved' id="living" class="form_radio">
+                        <label for="living" class="form_label">Уже живу в штатах</label>
+                    </div>
+                </div>
+                <div class="form_row">
+                    <textarea name="signup[comment]" class="form_field is-textarea" placeholder="Расскажите подробнее про вашу ситуацию. Какой план? Если уже переезжаете, то на какой стадии вы сейчас, в чём трудности? Если уже живете в штатах, то расскажите, что интересно узнать на вебинаре?"></textarea>
+                </div>
+
+                <div class="form_row is-money">
+                    <input name="subscribe" type="submit" value="Оплатить" class="button">
+                    <span class="form-elem is-money"></span>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="payme-content payment is-hidden" id="payment">
+        <h2 class="section_title is-invert">Оплата</h2>
+        <form id="payment-form" action="">
+            <div class="form_payment">
+                <h3 class="form_legend">Мы принимаем карты VISA и MasterCard</h3>
+                <div class="form_row">
+                    <div class="form_container"><input type="text" pattern="^[0-9]*$" placeholder="Номер карты" class="form_field"></div>
+                </div>
+                <div class="form_row">
+                    <div class="form_container is-half">
+                        <input type="month" placeholder="Срок действия" class="form_field">
+                        <!-- <div class="message-error">Срок действия истек</div> -->
+                    </div>
+                    <div class="form_container is-half">
+                        <input type="password" pattern="^[0-9]*$" placeholder="CVV" class="form_field" maxlength="3">
+                        <span class="form_comm">на обратной стороне карты</span>
+                    </div>
+                </div>
+                <div class="form_row">
+                    <div class="form_container"><input type="text" placeholder="Имя держателя карты" class="form_field"></div>
+                </div>
+            </div>
+            <div class="form_row">
+                <input type="submit" value="Оплатить билетик" class="button">
+            </div>
+            <div class="form_row">
+                <div class="form-elem is-veryfied"></div>
+            </div>
+        </form>
+    </div>
+    <div id="thankyou" class="payme-content is-succeed is-hidden">
+        <h2 class="section_title is-invert">Спасибо, мы получили оплату!</h2>
+        <div class="form_text">
+            <div class="form-text_info">
+                <p>На почту сейчас прилетит письмо со ссылкой на вебинар.</p>
+                <p>Если вдруг не приходит — напишите на howto@californicate.ru</p>
+            </div>
+            <div class="form-text_icon is-popcorn"></div>
+            <div class="form-text_info">Готовьте попкорн!</div>
+        </div>
+    </div>
+</section>

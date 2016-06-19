@@ -16,7 +16,7 @@ var allcss = glob.sync("*/styles/*.css");
 console.log(allcss);
 
 app.get('/', function(req, res){ 
-	res.render('index-module/index.ejs', {allcss: allcss});
+	res.render('0-index-module/index.ejs', {allcss: allcss});
 });
 
 

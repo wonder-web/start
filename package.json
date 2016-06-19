@@ -12,8 +12,13 @@
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "cssnext": "^1.8.4",
-    "gulp": "^3.9.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.1.0",
     "gulp-postcss": "^6.1.1",
+    "gulp-watch": "^4.3.8",
+    "postcss-import": "^8.1.2",
+    "postcss-mixins": "^4.0.2",
     "precss": "^1.4.0"
   }
 }
