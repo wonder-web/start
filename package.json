@@ -16,9 +16,25 @@
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.1.0",
     "gulp-postcss": "^6.1.1",
+    "gulp-svg-icons": "^0.6.1",
     "gulp-watch": "^4.3.8",
+    "postcss-assets": "^4.1.0",
+    "postcss-brand-colors": "^0.4.0",
+    "postcss-calc": "^5.2.1",
+    "postcss-clearfix": "^1.0.0",
+    "postcss-color-alpha": "^1.0.3",
+    "postcss-color-function": "^2.0.1",
+    "postcss-custom-media": "^5.0.1",
+    "postcss-easings": "^0.3.0",
+    "postcss-focus": "^1.0.0",
     "postcss-import": "^8.1.2",
+    "postcss-media-minmax": "^2.1.2",
     "postcss-mixins": "^4.0.2",
-    "precss": "^1.4.0"
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^2.0.0",
+    "postcss-size": "^1.0.0",
+    "postcss-will-change": "^1.1.0",
+    "precss": "^1.4.0",
+    "run-sequence": "^1.2.1"
   }
 }
