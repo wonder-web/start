@@ -1,0 +1,14 @@
+{
+  "name": "webstart",
+  "version": "0.0.1",
+  "description": "Web project template with Node.js, Gulp and PostCSS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gilevskaya/webstart"
+  },
+  "dependencies": {
+    "express": "^4.9.7", 
+    "ejs": "^2.4.2", 
+    "glob": "^7.0.4"
+  }
+}
