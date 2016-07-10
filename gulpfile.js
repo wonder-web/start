@@ -76,7 +76,7 @@ gulp.task('css', function () {
     log('Processing css');
 
     let processors = [
-      autoprefixer, $css.import, $css.mixins,
+      autoprefixer, $css.assets, $css.import, $css.mixins,
       $css.simpleVars, $css.nested, $css.customMedia,
       $css.mediaMinmax, $css.clearfix, $css.focus,
       $css.brandColors, $css.colorAlpha,$css.colorFunction,
