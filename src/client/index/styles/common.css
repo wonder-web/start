@@ -19,3 +19,16 @@ $orange: #FF5600;
 
 $base-font: 'Open Sans', Helvetica, Arial, sans-serif;
 $title-font: 'Museo Sans 900', $base-font;
+
+@define-mixin clear-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+@define-mixin content {
+    width: 85%;
+    max-width: 1080px;
+    margin-right: auto;
+    margin-left: auto;
+}

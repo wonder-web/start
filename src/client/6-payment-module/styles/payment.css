@@ -1,4 +1,4 @@
-@import '../../0-index-module/styles/common.css'; 
+@import '../../index/styles/common.css'; 
 
 .payme {
     background: inline('../img/bg-form.png') 0 0 no-repeat;

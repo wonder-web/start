@@ -1,18 +1,5 @@
 @import 'common.css'; 
 
-@define-mixin clear-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-@define-mixin content {
-    width: 85%;
-    max-width: 1080px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 *,
 *::before,
 *::after {

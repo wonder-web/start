@@ -24,7 +24,7 @@ allcss = allcss.map(css => path.relative(baseDir, css));
 console.log(allcss);
 
 app.get('/', function(req, res){ 
-	res.render('0-index-module/index.ejs', {allcss: allcss});
+	res.render('index/index.ejs', {allcss: allcss});
 });
 
 
