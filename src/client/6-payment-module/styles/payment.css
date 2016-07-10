@@ -1,3 +1,5 @@
+@import '../../0-index-module/styles/common.css'; 
+
 .payme {
     background: inline('../img/bg-form.png') 0 0 no-repeat;
     background-size: cover;

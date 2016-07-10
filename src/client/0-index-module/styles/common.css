@@ -1,0 +1,21 @@
+@import '../../../../lib/styles/normalize.css'; 
+
+@font-face {
+    font-family: 'Museo Sans 900';
+    src: url('../fonts/museosanscyrl_3.woff2') format('woff2'),
+         url('../fonts/museosanscyrl_3.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@custom-media --tablet (width <= 860px);
+@custom-media --phone (width <= 650px);
+@custom-media --small-phone (width <= 400px);
+
+$black: #000;
+$white: #fff;
+$astronaut: #004675;
+$orange: #FF5600;
+
+$base-font: 'Open Sans', Helvetica, Arial, sans-serif;
+$title-font: 'Museo Sans 900', $base-font;

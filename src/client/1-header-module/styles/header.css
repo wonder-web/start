@@ -1,3 +1,5 @@
+@import '../../0-index-module/styles/common.css'; 
+
 .promo {
     background: #d7ebf5 url(../img/bg-promo.jpg) center center no-repeat;
     background-size: cover;
