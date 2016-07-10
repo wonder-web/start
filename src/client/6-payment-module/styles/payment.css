@@ -1,0 +1,23 @@
+.payme {
+    background: inline('../img/bg-form.png') 0 0 no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.payme-content {
+    width: 800px;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    @media (--tablet) {
+        width: 100%;
+    }
+
+    &.is-hidden {
+        transform: scale(0);
+        height: 0;
+        visibility: hidden;
+    }
+}

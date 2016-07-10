@@ -1,0 +1,21 @@
+.promo {
+    background: #d7ebf5 url(../img/bg-promo.jpg) center center no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    size: 100% 100vh;
+    max-height: 840px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: 0 auto;
+
+    @media (height <= 840px) {
+        height: 100%;
+    }
+
+    @media (--tablet) {
+        background-size: 0 0;
+    }
+}
