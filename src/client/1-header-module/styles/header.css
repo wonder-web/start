@@ -19,3 +19,185 @@
         background-size: 0 0;
     }
 }
+
+.promo-content {
+    width: 50%;
+    min-width: 640px;
+    padding-right: 40px;
+    align-self: flex-end;
+
+    @media (--tablet) {
+        width: 100%;
+        min-width: 100%;
+        padding: 0 40px;
+        text-align: center;
+    }
+}
+
+.promo_top-title {
+    font: 900 16px $base-font;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+}
+
+.promo_title {
+    font: 400 32px/40px $title-font;
+    margin: 0 0 20px;
+    padding-left: 20px;
+    position: relative;
+    z-index: 2;
+
+    @media (--tablet) {
+        text-shadow: 0 1px 1px $white.8;
+        padding-left: 0;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: -23px;
+        right: 150px;
+        z-index: -1;
+        background: inline('../img/bear.svg') 0 0 no-repeat;
+        size: 72px 36px;
+
+        @media (--phone) {
+            display: none;
+        }
+    }
+}
+
+.promo_descr {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 50px;
+    padding-left: 20px;
+
+    @media (--tablet) {
+        text-shadow: 0 1px 1px $white.8;
+        padding-left: 0;
+    }
+}
+
+.promo_info {
+    @mixin clear-list;
+    display: flex;
+    margin-bottom: 60px;
+
+    @media (--tablet) {
+        justify-content: center;
+    }
+
+    @media (--phone) {
+        flex-direction: column;
+    }
+}
+
+.promo-info_item {
+    margin-right: 40px;
+    padding-left: 100px;
+    position: relative;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.is-date:before,
+    &.is-ticket:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-repeat: no-repeat;
+    }
+
+    &.is-date:before {
+        background-image: inline('../img/i-calendar.svg');
+        background-size: contain;
+        size: size('../img/i-calendar.svg');
+    }
+    &.is-ticket:before {
+        background-image: inline('../img/i-plan.svg');
+        background-size: contain;
+        size: size('../img/i-plan.svg');
+        left: 20px;
+
+        @media (--phone) {
+            left: 7px;
+        }
+    }
+
+    @media (--phone) {
+        margin-bottom: 30px;
+        text-align: left;
+    }
+}
+
+.promo-info_data {
+    color: $astronaut;
+    font-size: 20px;
+    text-align: center;
+    width: 100px;
+    display: inline-block;
+
+    @media (--phone) {
+        padding-top: 13px;
+    }
+
+    &.is-sold {
+        position: relative;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            size: size('../img/sold.svg');
+            background: inline('../img/sold.svg') 0 0 no-repeat;
+            background-size: contain;
+        }
+    }
+}
+
+.promo-button_container {
+    margin-left: 20px;
+
+    @media (--tablet) {
+        margin-left: 0;
+    }
+}
+
+.button {
+    text-decoration: none;
+    border: 0;
+    height: 75px;
+    text-align: center;
+    margin: 0 auto;
+    color: $white;
+    font: 900 26px/73px $base-font;
+    background-color: $orange;
+    border-radius: 10px;
+    padding: 0 45px;
+    display: inline-block;
+    transition: background-color 200ms;
+
+    &:hover {
+        background-color: color($orange shade(12%));
+    }
+
+    &:focus {
+        outline: none;
+        transform: scale(.98);
+        transition: transform .05;
+    }
+
+    .is-money & {
+        position: relative;
+        z-index: 2;
+
+        &:hover + .is-money {
+            top: -40px;
+        }
+    }
+}
