@@ -16,11 +16,12 @@ const $ = loadPlugins({lazy: true});
 const $css =  loadPlugins({pattern: 'postcss-*', replaceString: /^postcss-/});
 const autoprefixer = require('autoprefixer');
 
-
 gulp.task('help', $.taskListing);
 gulp.task('default', ['start']);
 
 gulp.task('start', ['build'], () => {
+    log('Starting nodemon');
+
 	let nodeOptions = getNodeOptions();
 
     if (args.verbose) {
@@ -50,6 +51,8 @@ gulp.task('start', ['build'], () => {
 });
 
 gulp.task('build',  (cb) => {
+    log('Building project');
+
     runSequence('clean', 'copy', 'css', cb);
 });
 
@@ -60,6 +63,8 @@ gulp.task('clean',  () => {
 });
 
 gulp.task('copy',  () => {
+    log('Copying files to dist');
+
     return gulp.src([
         config.src + '**/*',
         '!' + config.srcClient + '**/styles/*.css'
@@ -68,19 +73,21 @@ gulp.task('copy',  () => {
 });
 
 gulp.task('css', function () {
-  let processors = [
-    autoprefixer, $css.import, $css.mixins,
-    $css.simpleVars, $css.nested, $css.customMedia,
-    $css.mediaMinmax, $css.clearfix, $css.focus,
-    $css.brandColors, $css.colorAlpha,$css.colorFunction,
-    $css.calc, $css.size, $css.easings,
-    $css.willChange
-    /*cssnext, precss*/
-  ];
-  
-  return gulp.src(path.join(config.srcClient, '**/styles/*.css'))
-    .pipe($.postcss(processors))
-    .pipe(gulp.dest(config.distClient));
+    log('Processing css');
+
+    let processors = [
+      autoprefixer, $css.import, $css.mixins,
+      $css.simpleVars, $css.nested, $css.customMedia,
+      $css.mediaMinmax, $css.clearfix, $css.focus,
+      $css.brandColors, $css.colorAlpha,$css.colorFunction,
+      $css.calc, $css.size, $css.easings,
+      $css.willChange
+      /*cssnext, precss*/
+    ];
+    
+    return gulp.src(config.srcCss)
+      .pipe($.postcss(processors))
+      .pipe(gulp.dest(config.distClient));
 });
 
 //========================================
@@ -127,6 +134,8 @@ function startBrowserSync() {
 }
 
 function watch(){
+    gulp.watch([config.srcCss], ['css']);
+
     $.watch([
         config.src + '**/*',
         '!' + config.srcClient + '**/styles/*.css'

@@ -17,6 +17,7 @@ module.exports = () => {
 		srcServer: srcServer,
 		distClient: distClient,
 		distServer: distServer,
+		srcCss: path.join(srcClient, '**/styles/*.css'),
 
 		nodeServer:  path.join(distServer, 'app.js'),
 		defaultPort: '4000',
