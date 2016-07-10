@@ -1,22 +1,37 @@
 {
   "name": "webstart",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Web project template with Node.js, Gulp and PostCSS",
+  "main": "dist/server/app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gilevskaya/webstart"
+    "url": "git+https://github.com/gilevskaya/webstart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gilevskaya/webstart/issues"
+  },
+  "homepage": "https://github.com/gilevskaya/webstart#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./dist/server/app.js"
   },
   "dependencies": {
-    "express": "^4.9.7 "
+    "express": "^4.14.0",
+    "glob": "^7.0.5",
+    "path": "^0.12.7"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
-    "cssnext": "^1.8.4",
-    "del": "^2.2.0",
+    "autoprefixer": "^6.3.7",
+    "browser-sync": "^2.13.0",
+    "del": "^2.2.1",
     "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.2.4",
     "gulp-nodemon": "^2.1.0",
     "gulp-postcss": "^6.1.1",
-    "gulp-svg-icons": "^0.6.1",
+    "gulp-task-listing": "^1.0.1",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.8",
     "postcss-assets": "^4.1.0",
     "postcss-brand-colors": "^0.4.0",
@@ -24,6 +39,7 @@
     "postcss-clearfix": "^1.0.0",
     "postcss-color-alpha": "^1.0.3",
     "postcss-color-function": "^2.0.1",
+    "postcss-cssnext": "^2.7.0",
     "postcss-custom-media": "^5.0.1",
     "postcss-easings": "^0.3.0",
     "postcss-focus": "^1.0.0",
@@ -35,6 +51,7 @@
     "postcss-size": "^1.0.0",
     "postcss-will-change": "^1.1.0",
     "precss": "^1.4.0",
-    "run-sequence": "^1.2.1"
+    "run-sequence": "^1.2.2",
+    "yargs": "^4.7.1"
   }
 }

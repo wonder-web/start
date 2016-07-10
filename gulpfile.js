@@ -1,108 +1,151 @@
 'use strict';
 
-var autoprefixer = require('autoprefixer'),
-    gulp         = require('gulp'),
-    watch        = require('gulp-watch'), // TODO ??
-    nodemon      = require('gulp-nodemon'),
-    Icons        = require('gulp-svg-icons'),
+const config = require('./gulp.config')();
+const port = process.env.PORT || config.defaultPort; //devPort
 
-    runSequence  = require('run-sequence'), // for async gulp tasks
-    del          = require('del'),
-    postcss      = require('gulp-postcss'),
+const gulp = require('gulp');
+const args = require('yargs').argv;
 
-    postcssImport    = require('postcss-import'), //for @import to work
-    postcssMixins    = require('postcss-mixins'), //for @mixins to work
-    postcssSVars     = require('postcss-simple-vars'), // for $vars
-    postcssNested    = require('postcss-nested'), //https://github.com/postcss/postcss-nested
-    postcssCMedia    = require('postcss-custom-media'),
-    postcssMMinmax   = require('postcss-media-minmax'),
-    postcssClearfix  = require('postcss-clearfix'), //https://github.com/seaneking/postcss-clearfix
+const browserSync = require('browser-sync');
+const runSequence = require('run-sequence');
+const del = require('del');
+const path = require('path');
 
-    postcssFocus     = require('postcss-focus'),
-    postcssAssets    = require('postcss-assets'), //TODO add below
-    postcssBColors   = require('postcss-brand-colors'),
-    postcssCAlpha    = require('postcss-color-alpha'),
-    postcssCFunction = require('postcss-color-function'),
+const loadPlugins = require('gulp-load-plugins');
+const $ = loadPlugins({lazy: true});
+const $css =  loadPlugins({pattern: 'postcss-*', replaceString: /^postcss-/});
+const autoprefixer = require('autoprefixer');
 
-    postcssCalc      = require('postcss-calc'),
-    postcssSize      = require('postcss-size'),
-    postcssEasings   = require('postcss-easings'),
-    postcssWChange   = require('postcss-will-change'),
 
-    precss       = require('precss'),
-    cssnext      = require('cssnext')
-;
-    //browserSync  = require('browser-sync').create();
+gulp.task('help', $.taskListing);
+gulp.task('default', ['start']);
 
-var icons = new Icons('src/0-index-module/img/');
+gulp.task('start', ['build'], () => {
+	let nodeOptions = getNodeOptions();
 
-/* ==========================================================================
-   Variables
-   ========================================================================== */
+    if (args.verbose) {
+        console.log(nodeOptions);
+    }
 
-var paths = {
-  css: '/src/*/styles/*.css',
-  fonts: 'src/fonts/*',
-  js: 'src/scripts/*.js',
-  img: 'src/img/*',
-  assets: 'src/assets/*'
-};
+	return $.nodemon(nodeOptions)
+		.on('start', function () {
+	       log('*** nodemon started');
+	       startBrowserSync();
+	   	})
+		.on('restart', ev => {
+		    log('*** nodemon restarted');
+		    log('files changed:\n' + ev);
 
-gulp.task('default', function(callback) {
-  runSequence('clean',
-              'copy',
-              'css',
-              callback);
+		    setTimeout(function() {
+		        browserSync.notify('reloading now ...');
+		        browserSync.reload({stream: false});
+		    }, config.browserReloadDelay);
+		})
+		.on('crash', function () {
+		    log('*** nodemon crashed: script crashed for some reason');
+		})
+		.on('exit', function () {
+		    log('*** nodemon exited cleanly');
+		});
 });
 
-//gulp.task('sync', ['clean', 'copy', 'css']);
-
-gulp.task('node', function () {
-  nodemon({
-    script: 'dist/app.js',
-    env: { 'NODE_ENV': 'development' }
-  })
-})
-
-
-gulp.task('clean', function () {
-  return del([
-    'dist'
-  ]);
+gulp.task('build',  (cb) => {
+    runSequence('clean', 'copy', 'css', cb);
 });
 
-//no .css in this copy
-gulp.task('copy', function () {
-  return gulp.src(['src/**/*', '!src/**/styles/*.css']) 
-    .pipe(gulp.dest('dist'));
+gulp.task('clean',  () => {
+    let delConfig = [].concat(config.dist);
+	log('Cleaning: ' + $.util.colors.blue(delConfig));
+	return del(delConfig);
+});
+
+gulp.task('copy',  () => {
+    return gulp.src([
+        config.src + '**/*',
+        '!' + config.srcClient + '**/styles/*.css'
+    ])
+    .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('css', function () {
-  var processors = [
-  	autoprefixer,
-    postcssImport,
-    postcssMixins,
-    postcssSVars,
-    postcssNested,
-    postcssCMedia,
-    postcssMMinmax,
-    postcssClearfix,
-
-    postcssFocus,
-
-    postcssBColors,
-    postcssCAlpha,
-    postcssCFunction,
-
-    postcssCalc,
-    postcssSize,
-    postcssEasings,
-    postcssWChange
-  	/*cssnext,
-  	precss*/
+  let processors = [
+    autoprefixer, $css.import, $css.mixins,
+    $css.simpleVars, $css.nested, $css.customMedia,
+    $css.mediaMinmax, $css.clearfix, $css.focus,
+    $css.brandColors, $css.colorAlpha,$css.colorFunction,
+    $css.calc, $css.size, $css.easings,
+    $css.willChange
+    /*cssnext, precss*/
   ];
   
-  return gulp.src('src/**/styles/*.css')
-    .pipe(postcss(processors))
-    .pipe(gulp.dest('dist'));
+  return gulp.src(path.join(config.srcClient, '**/styles/*.css'))
+    .pipe($.postcss(processors))
+    .pipe(gulp.dest(config.distClient));
 });
+
+//========================================
+function getNodeOptions() {
+    return {
+        script: config.nodeServer,
+        delayTime: 1, //in seconds
+        env: {
+            'PORT': port
+        },
+        watch: [config.distServer]
+    };
+}
+
+function startBrowserSync() {
+    if (args.nosync || browserSync.active) {
+        return;
+    }
+
+    log('Starting BrowserSync on port ' + port);
+
+    watch();
+
+	let options = {
+        proxy: 'localhost:' + port,
+        port: config.browserSyncPort,
+        files: [
+            config.distClient + '**/*.*'
+        ],
+        ghostMode: {
+            clicks: true,
+            location: false,
+            forms: true,
+            scroll: true
+        },
+        injectChanges: true,
+        logFileChanges: true,
+        logPrefix: 'browser-sync',
+        notify: true,
+        reloadDelay: 0 //1000
+    };
+
+    browserSync(options);
+}
+
+function watch(){
+    $.watch([
+        config.src + '**/*',
+        '!' + config.srcClient + '**/styles/*.css'
+    ], {
+        base: config.src, 
+        verbose: true,
+        ignoreInitial: true
+    })
+    .pipe(gulp.dest(config.dist));
+}
+
+function log(msg) {
+    if (typeof(msg) === 'object') {
+        for (var item in msg) {
+            if (msg.hasOwnProperty(item)) {
+                $.util.log($.util.colors.blue(msg[item]));
+            }
+        }
+    } else {
+        $.util.log($.util.colors.blue(msg));
+    }
+}
