@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="103px" height="72px" viewBox="0 0 103 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>sold</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop" sketch:type="MSArtboardGroup" transform="translate(-581.000000, -715.000000)">
+            <g id="sold" sketch:type="MSLayerGroup" transform="translate(631.963448, 751.185274) rotate(-15.000000) translate(-631.963448, -751.185274) translate(574.963448, 705.185274)">
+                <path d="M98.6125977,18.9073399 L106.493598,48.5423399 C107.824598,53.5493399 104.879598,58.6383399 99.8675977,59.9913399 L27.6205977,79.4963399 C22.6075977,80.8503399 17.5325977,77.9273399 16.2005977,72.9193399 L8.31959772,43.2843399 C6.98859772,38.2773399 9.93359772,33.1893399 14.9465977,31.8353399 L87.1925977,12.3303399 C92.2055977,10.9773399 97.2805977,13.9003399 98.6125977,18.9073399 L98.6125977,18.9073399 Z" id="Shape" stroke="#FF0000" stroke-width="3" sketch:type="MSShapeGroup" transform="translate(57.406600, 45.913547) rotate(15.000000) translate(-57.406600, -45.913547) "></path>
+                <text id="SOLD" sketch:type="MSTextLayer" font-family="Helvetica" font-size="26" font-weight="bold" letter-spacing="1.5" fill="#FF0000">
+                    <tspan x="19" y="56">SOL</tspan>
+                    <tspan x="76.9472656" y="56">D</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

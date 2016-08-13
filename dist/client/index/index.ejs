@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/Event" >
+<head>
+    <meta charset="UTF-8">
+    <title>Landing page title</title>
+
+    <% allcss.forEach(function(css){ %>
+        <link rel="stylesheet" href="./<%= css %>">
+    <% }); %>
+
+</head>
+<body>
+    <div class="page">
+        <% include ../1-header-module/header %>
+        <% include ../2-details-module/details %> 
+        <% include ../3-features-module/features %>
+        <% include ../4-reviews-module/reviews %>
+        <% include ../5-authors-module/authors %>
+        <% include ../6-payment-module/payment %>
+        <% include ../7-footer-module/footer %>
+    </div>
+</body>
