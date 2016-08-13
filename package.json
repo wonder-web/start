@@ -15,7 +15,7 @@
   "homepage": "https://github.com/gilevskaya/webstart#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./dist/server/app.js"
+    "start": "node ./dist/server/app.js"
   },
   "dependencies": {
     "ejs": "^2.4.2",
